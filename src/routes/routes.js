@@ -2,14 +2,107 @@ const { Router } = require('express');
 const router = Router();
  
 //rutas
+
+//GET
 router.get('/', (req, res) => {
-     //llenar objeto de javascript
      req.getConnection((err, conn) => {
-          conn.query('select * from usuarios', (err, users) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
                if (err) {
                     console.log(err);
                }
-               res.json(users);
+               res.json();
+          });
+     });
+});
+router.get('/tienda', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.get('/tienda/:categoria', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.get('/tienda/:categoria/:talla', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.get('/tienda/articulo/id', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.get('/carrito', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.get('/perfil/id', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+
+//POST
+router.post('/iniciar-sesion', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.post('/registro', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
+          });
+     });
+});
+router.post('/perfil/:id', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json();
           });
      });
 });

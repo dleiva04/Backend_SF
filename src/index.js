@@ -14,7 +14,7 @@ app.use(conn(mysql, {
     user: 'webdev',
     password: '1234',
     port: 3306,
-    database: 'pruebas'
+    database: 'SF_DB'
 }, 'single'));
 
 // codigo para evitar CORS
@@ -32,7 +32,7 @@ app.use((req,res,next)=>{
 });
 
 
-app.use('/api/sf',require('./routes/routes'));   //explicar
+app.use('/api/sf',require('./routes/routes'));
 
 app.listen(app.get('port'),()=>{
      console.log(`Server on port ${app.get('port')}`);
