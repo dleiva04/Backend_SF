@@ -4,6 +4,17 @@ const router = Router();
 //rutas
 
 //GET
+router.get('/pruebas', (req, res) => {
+     req.getConnection((err, conn) => {
+          conn.query(`select * from users`, (err,users) => {
+               if (err) {
+                    console.log(err);
+               }
+               res.json(users);
+          });
+     });
+});
+
 router.get('/', (req, res) => {
      req.getConnection((err, conn) => {
           conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
