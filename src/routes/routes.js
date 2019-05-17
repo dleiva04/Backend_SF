@@ -87,7 +87,9 @@ router.get('/carrito', (req, res) => {
           });
      });
 });
-router.get('/perfil/id', (req, res) => {
+
+//Me manda ID y le mando usuario completo.
+router.get('/perfil/:id', (req, res) => {
      req.getConnection((err, conn) => {
           conn.query(/*codigo mysql*/``, (err,/*variable que guarde la consulta*/ ) => {
                if (err) {
@@ -132,6 +134,8 @@ router.post('/registro', (req, res) => {
           })
       });    
 });
+
+//Update de perfil con los nuevos datos enviados(frontend)...
 
 router.post('/perfil/:id', (req, res) => {
      req.getConnection((err, conn) => {
