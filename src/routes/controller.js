@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 module.exports = {
      /*plantilla: async (req, res, ans) => {
-
      }*/
      iniciarSesionWeb: async (req, res, ans) => {
           req.getConnection((err, conn) => {
@@ -51,15 +50,15 @@ module.exports = {
      },
      adminLogin: async (req, res, ans) => {
           req.getConnection((err, conn) => {
-               conn.query(`call AdminLogin('${req.body.User_Admin}')`, (err, user) => {
+               conn.query(`call Login_Admin('${req.body.User_Admin}')`, (err, user) => {
                     if (err) {
                          console.log(err);
                     }
                     bcrypt.compare(req.body.Password_Admin, user[0][0].Password_Admin).then((response) => {
                          if (response === true) {
-                              res.json({ 'mensaje': 'Bienvenido' });
+                              res.json(user[0][0]);//definir que deseo  guardar
                          } else {
-                              res.json({ 'error': 'Usuario y/o contraseña incorrecta' });
+                              res.json({ 'mensaje': 'Usuario no registrado' });
                          }
                     });
                });
@@ -67,33 +66,25 @@ module.exports = {
      },
      guardarCuponUnico: async (req, res, ans) => {
           req.getConnection((err, conn) => {
-               conn.query(`call AdminLogin('${req.body.User_Admin}')`, (err, user) => {
+               conn.query(`call Coupon_OneUse('${req.body.Coupon_Code}')`, (err, user) => {
                     if (err) {
                          console.log(err);
                     }
-                    bcrypt.compare(req.body.Password_Admin, user[0][0].Password_Admin).then((response) => {
-                         if (response === true) {
-                              res.json({ 'mensaje': 'Bienvenido' });
-                         } else {
-                              res.json({ 'error': 'Usuario y/o contraseña incorrecta' });
-                         }
-                    });
+                    console.log(req.body.Coupon_Code);
+                    res.json({ 'mensaje': 'Cupón guardado con éxito' });
+                         
                });
           });
      },
      guardarCuponTodos: async (req, res, ans) => {
           req.getConnection((err, conn) => {
-               conn.query(`call AdminLogin('${req.body.User_Admin}')`, (err, user) => {
+               conn.query(`call Coupon_MultipleUse('${req.body.Coupon_Code}')`, (err, user) => {
                     if (err) {
                          console.log(err);
                     }
-                    bcrypt.compare(req.body.Password_Admin, user[0][0].Password_Admin).then((response) => {
-                         if (response === true) {
-                              res.json({ 'mensaje': 'Bienvenido' });
-                         } else {
-                              res.json({ 'error': 'Usuario y/o contraseña incorrecta' });
-                         }
-                    });
+                    console.log(req.body.Coupon_Code);
+                    res.json({ 'mensaje': 'Cupón guardado con éxito' });
+                         
                });
           });
      }
