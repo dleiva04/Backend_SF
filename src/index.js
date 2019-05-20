@@ -3,9 +3,11 @@ const morgan = require('morgan');
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const conn = require('express-myconnection');
 
 app.use(morgan('dev'));
+dotenv.config();
 app.use(express.urlencoded({extended:false}));
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
@@ -14,11 +16,11 @@ app.use(express.json());
 app.use(cors());
 
 app.use(conn(mysql, {
-    host: '204.48.29.79',
-    user: 'webdev',
-    password: '1234',
-    port: 3306,
-    database: 'SF_Test'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT,
+    database: process.env.DB_DB
 }, 'single'));
 
 
