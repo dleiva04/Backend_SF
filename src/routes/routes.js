@@ -13,10 +13,15 @@ router.route('/adminRegister').post(controller.adminRegister);
 router.route('/cuponUnico').post(controller.guardarCuponUnico);
 router.route('/cuponMultiple').post(controller.guardarCuponTodos);
 
+router.route('/agregarCategoria').post(controller.agregarCategoria);
+
 router.route('/agregarProductos').post(controller.agregarProducto);
 router.route('/borrarProducto').post(controller.borrarProducto);
 router.route('/editarProducto').post(controller.editarProducto);
 router.route('/verProducto').post(controller.verProducto);
+
+router.route('/todosProductos').get(controller.obtenerTodosProductos);
+router.route('/sortProductos').post(controller.sortProductos);
 
 
 

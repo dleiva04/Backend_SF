@@ -67,14 +67,34 @@ module.exports = {
                });
           });
      },
-     obtenerPerfil: async (req,res,ans) => {
-          
+     verPerfil: async (req,res,ans) => {
+          const user = jwt.verify(req.body.token, `${process.env.TOKEN}`);
+          if(user.admin != undefined){
+               res.json(user.admin);
+          }else{
+               res.json(user.user);
+          }
      },
      obtenerTodosProductos: async (req,res,ans) => {
+          req.getConnection((err, conn) => {
+               conn.query(`call AllProducts()`, (err, products) => {
+                    if (err) {
+                         res.json(err);
+                    }
+                    res.json(products[0]);
 
+               });
+          });
      },
-     obtenerTodosProductos_Sort: async (req,res,ans) => {
-
+     sortProductos: async (req,res,ans) => {
+          req.getConnection((err, conn) => {
+               conn.query(`call SortProducts(${req.body.Id_Category},${req.body.Id_Size},${req.body.Price})`, (err, products) => {
+                    if (err) {
+                         res.json(err);
+                    }
+                    res.json(products[0]);
+               });
+          });
      },
      verProducto: async (req, res, ans) => {
           req.getConnection((err, conn) => {
@@ -160,5 +180,15 @@ module.exports = {
                });
           });
      },
+     agregarCategoria: async (req,res,ans) => {
+          req.getConnection((err, conn) => {
+               conn.query(`call AddCategory_Admin('${req.body.Name_Cat}')`, (err, category) => {
+                    if (err) {
+                         res.json(err);
+                    }
+                    res.json({ mensaje: "Producto añadido con exito" });
+               });
+          });
+     }
      //=======================================================================
 };
