@@ -13,6 +13,8 @@ router.route('/adminRegister').post(controller.adminRegister);
 router.route('/cuponUnico').post(controller.guardarCuponUnico);
 router.route('/cuponMultiple').post(controller.guardarCuponTodos);
 
+router.route('/verPerfil').post(controller.verPerfil);
+
 router.route('/agregarCategoria').post(controller.agregarCategoria);
 
 router.route('/agregarProductos').post(controller.agregarProducto);
@@ -23,7 +25,7 @@ router.route('/verProducto').post(controller.verProducto);
 router.route('/todosProductos').get(controller.obtenerTodosProductos);
 router.route('/sortProductos').post(controller.sortProductos);
 
-
+router.route('/agregarProductoCarrito').post(controller.agregarProductoCarrito);
 
 module.exports = router;
 

@@ -28,16 +28,9 @@ module.exports = {
                          conn.query(`call Register('${req.body.Name_User}','${hash}','${req.body.Email_User}','${req.body.Phone_User}')`, (err, user) => {
                               if (err) {
                                    res.json({ err });
-                              }
-                              req.getConnection((err, conn) => {
-                                   conn.query(`SELECT LAST_INSERT_ID() as Id_User,Name_User,Email_User,Password_User from users where Id_User = LAST_INSERT_ID();`, (err, ans) => {
-                                        if (err) {
-                                             res.json(err);
-                                        }
-                                        const token = jwt.sign({ user: ans[0] }, `${process.env.TOKEN}`, { expiresIn: '1d' });
-                                        res.json({ token });
-                                   });
-                              });
+                              }                              
+                              const token = jwt.sign({ user: user[0][0] }, `${process.env.TOKEN}`, { expiresIn: '1d' });
+                              res.json({ token });                              
                          });
                     });
                })
@@ -105,6 +98,9 @@ module.exports = {
                     res.json(product[0][0]);
                });
           });
+     },
+     agregarProductoCarrito: async (req,res,ans)=>{
+          
      },
      //=======================================================================
 
