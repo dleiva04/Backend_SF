@@ -100,7 +100,23 @@ module.exports = {
           });
      },
      agregarProductoCarrito: async (req,res,ans)=>{
-          
+          const user = jwt.verify(req.body.token, `${process.env.TOKEN}`);
+          if(user != undefined){
+               req.getConnection((err, conn) => {
+                    conn.query(`call AddItem_Cart(${user.user.Id_User},${req.body.Id_Product},${req.body.Size_Id},${req.body.Quantity})`, (err, query) => {
+                         if (err) {
+                              res.json(err);
+                         }
+                         res.json(query);
+                    });
+               });
+          }
+     },
+     verCarrito: async (req,res,ans)=>{
+          const user = jwt.verify(req.body.token, `${process.env.TOKEN}`);
+          if(user != undefined){
+               //poner codigo de los items del carrito
+          } 
      },
      //=======================================================================
 
