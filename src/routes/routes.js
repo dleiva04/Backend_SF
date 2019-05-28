@@ -26,6 +26,7 @@ router.route('/todosProductos').get(controller.obtenerTodosProductos);
 router.route('/sortProductos').post(controller.sortProductos);
 
 router.route('/agregarProductoCarrito').post(controller.agregarProductoCarrito);
+router.route('/verCarrito').post(controller.verCarrito);
 
 module.exports = router;
 

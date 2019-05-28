@@ -28,9 +28,9 @@ module.exports = {
                          conn.query(`call Register('${req.body.Name_User}','${hash}','${req.body.Email_User}','${req.body.Phone_User}')`, (err, user) => {
                               if (err) {
                                    res.json({ err });
-                              }                              
+                              }
                               const token = jwt.sign({ user: user[0][0] }, `${process.env.TOKEN}`, { expiresIn: '1d' });
-                              res.json({ token });                              
+                              res.json({ token });
                          });
                     });
                })
@@ -60,15 +60,15 @@ module.exports = {
                });
           });
      },
-     verPerfil: async (req,res,ans) => {
+     verPerfil: async (req, res, ans) => {
           const user = jwt.verify(req.body.token, `${process.env.TOKEN}`);
-          if(user.admin != undefined){
+          if (user.admin != undefined) {
                res.json(user.admin);
-          }else{
+          } else {
                res.json(user.user);
           }
      },
-     obtenerTodosProductos: async (req,res,ans) => {
+     obtenerTodosProductos: async (req, res, ans) => {
           req.getConnection((err, conn) => {
                conn.query(`call AllProducts()`, (err, products) => {
                     if (err) {
@@ -79,7 +79,7 @@ module.exports = {
                });
           });
      },
-     sortProductos: async (req,res,ans) => {
+     sortProductos: async (req, res, ans) => {
           req.getConnection((err, conn) => {
                conn.query(`call SortProducts(${req.body.Id_Category},${req.body.Id_Size},${req.body.Price})`, (err, products) => {
                     if (err) {
@@ -99,9 +99,9 @@ module.exports = {
                });
           });
      },
-     agregarProductoCarrito: async (req,res,ans)=>{
+     agregarProductoCarrito: async (req, res, ans) => {
           const user = jwt.verify(req.body.token, `${process.env.TOKEN}`);
-          if(user != undefined){
+          if (user != undefined) {
                req.getConnection((err, conn) => {
                     conn.query(`call AddItem_Cart(${user.user.Id_User},${req.body.Id_Product},${req.body.Size_Id},${req.body.Quantity})`, (err, query) => {
                          if (err) {
@@ -112,11 +112,19 @@ module.exports = {
                });
           }
      },
-     verCarrito: async (req,res,ans)=>{
+     verCarrito: async (req, res, ans) => {
           const user = jwt.verify(req.body.token, `${process.env.TOKEN}`);
-          if(user != undefined){
+          if (user != undefined) {
                //poner codigo de los items del carrito
-          } 
+               req.getConnection((err, conn) => {
+                    conn.query(`call ViewCart(${user.user.Id_User})`, (err, products) => {
+                         if (err) {
+                              res.json(err);
+                         }
+                         res.json(products);
+                    });
+               });
+          }
      },
      //=======================================================================
 
@@ -192,7 +200,7 @@ module.exports = {
                });
           });
      },
-     agregarCategoria: async (req,res,ans) => {
+     agregarCategoria: async (req, res, ans) => {
           req.getConnection((err, conn) => {
                conn.query(`call AddCategory_Admin('${req.body.Name_Cat}')`, (err, category) => {
                     if (err) {
