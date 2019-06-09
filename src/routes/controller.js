@@ -6,11 +6,11 @@ module.exports = {
      //=======================================================================
      iniciarSesionWeb: async (req, res, ans) => {
           req.getConnection((err, conn) => {
-               conn.query(`call Login('${req.body.Email_User}')`, (err, user) => {
+               conn.query(`call Login('${req.body.User.Email_User}')`, (err, user) => {
                     if (err) {
                          res.json({ err });
                     }
-                    bcrypt.compare(req.body.Password_User, user[0][0].Password_User).then((response) => {
+                    bcrypt.compare(req.body.User.Password_User, user[0][0].Password_User).then((response) => {
                          if (response === true) {
                               const token = jwt.sign({ user: user[0][0] }, `${process.env.TOKEN}`, { expiresIn: '1d' });
                               res.json({ token });
@@ -153,13 +153,13 @@ module.exports = {
                })
           });
      },
-     adminLogin: async (req, res, ans) => {
+     adminLogin: (req, res, ans) => {
           req.getConnection((err, conn) => {
-               conn.query(`call Login_Admin('${req.body.User_Admin}')`, (err, user) => {
+               conn.query(`call Login_Admin('${req.body.adminUser.User_Admin}')`, (err, user) => {
                     if (err) {
                          console.log(err);
                     }
-                    bcrypt.compare(req.body.Password_Admin, user[0][0].Password_Admin).then((response) => {
+                    bcrypt.compare(req.body.adminUser.Password_Admin, user[0][0].Password_Admin).then((response) => {
                          if (response === true) {
                               const token = jwt.sign({ admin: user[0][0] }, `${process.env.TOKEN}`, { expiresIn: '1d' });
                               res.json({ token });

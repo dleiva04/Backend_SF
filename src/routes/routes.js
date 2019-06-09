@@ -13,7 +13,7 @@ router.route('/adminRegister').post(controller.adminRegister);
 router.route('/cuponUnico').post(controller.guardarCuponUnico);
 router.route('/cuponMultiple').post(controller.guardarCuponTodos);
 
-router.route('/verPerfil').post(controller.verPerfil);
+router.route('/verPerfil').post(controller.verPerfil); 
 
 router.route('/agregarCategoria').post(controller.agregarCategoria);
 
